@@ -15,6 +15,7 @@ spec:
       containers:
         - name: cdn-demo
           image: southamerica-west1-docker.pkg.dev/dryruns/cdn-demo/cdn-demo:latest 
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000 
           env:
