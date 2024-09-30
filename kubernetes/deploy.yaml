@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: cdn-demo-deployment
 spec:
-  replicas: 1 # Adjust the number of replicas as needed
+  replicas: 1 
   selector:
     matchLabels:
       app: cdn-demo
@@ -14,9 +14,15 @@ spec:
     spec:
       containers:
         - name: cdn-demo
-          image: southamerica-west1-docker.pkg.dev/dryruns/cdn-demo/cdn-demo:latest # Use the correct image tag
+          image: southamerica-west1-docker.pkg.dev/dryruns/cdn-demo/cdn-demo:latest 
           ports:
-            - containerPort: 8080 # Expose the port your Spring Boot app listens on
+            - containerPort: 3000 
+          env:
+            - name: CDN_BASE_URL # Reference the environment variable from the ConfigMap
+              valueFrom:
+                configMapKeyRef:
+                  name: cdn-config # Name of the ConfigMap
+                  key: CDN_BASE_URL # Key within the ConfigMap
 ---
 apiVersion: v1
 kind: Service
@@ -28,5 +34,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3000 # Map the service port to the container port
-  type: LoadBalancer 
+      targetPort: 3000 
+  type: LoadBalancer
