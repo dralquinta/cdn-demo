@@ -1,3 +1,5 @@
 kubernetes
 .gitignore
 deploy.sh
+
+notes.txt
