@@ -1,0 +1,28 @@
+/* style.css */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+  }
+  
+  h1, h2 {
+    color: #333; 
+  }
+  
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .image-gallery img {
+    max-width: 300px;
+    height: auto;
+    margin: 10px;
+    border: 1px solid #ccc; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .video-container {
+    text-align: center;
+    margin-top: 20px;
+  }

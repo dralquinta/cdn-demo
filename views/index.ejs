@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CDN Demo</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+    const cdnBaseUrl = '<%= cdnBaseUrl %>';
+
+    async function fetchFiles(directory) {
+      try {
+        const response = await fetch(`${cdnBaseUrl}/${directory}/`); // Assuming your CDN supports directory listing
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const text = await response.text();
+        // Parse the directory listing (you might need to adjust this based on your CDN's response format)
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        const links = doc.querySelectorAll('a');
+        const files = Array.from(links)
+          .map(link => link.textContent)
+          .filter(filename => filename.trim() !== '' && !filename.endsWith('/')); // Filter out empty entries and directories
+        return files;
+      } catch (error) {
+        console.error('Error fetching files:', error);
+        return [];
+      }
+    }
+
+    async function displayContent() {
+      const imageContainer = document.querySelector('.image-gallery');
+      const videoContainer = document.querySelector('.video-container');
+
+      const imageFiles = await fetchFiles('images');
+      imageFiles.forEach(filename => {
+        const img = document.createElement('img');
+        img.src = `${cdnBaseUrl}/images/${filename}`;
+        img.alt = 'Image from CDN';
+        imageContainer.appendChild(img);
+      });
+
+      const videoFiles = await fetchFiles('videos');
+      videoFiles.forEach(filename => {
+        const video = document.createElement('video');
+        video.width = 640;
+        video.height = 360;
+        video.controls = true;
+
+        const source = document.createElement('source');
+        source.src = `${cdnBaseUrl}/videos/${filename}`;
+        source.type = 'video/mp4'; // Adjust if you have other video formats
+
+        video.appendChild(source);
+        videoContainer.appendChild(video);
+      });
+    }
+
+    displayContent();
+  </script>
+</head>
+<body>
+
+  <h1>Content from CDN</h1>
+
+  <h2>Images</h2>
+  <div class="image-gallery"></div> <%-- Images will be added here dynamically --%>
+
+  <h2>Video</h2>
+  <div class="video-container"></div> <%-- Videos will be added here dynamically --%>
+
+</body>
+</html>
