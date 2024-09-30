@@ -4,3 +4,4 @@ metadata:
   name: cdn-config
 data:
   CDN_BASE_URL: "https://34.36.0.65"
+  GCS_BUCKET: "dalquint-cdn-bucket"

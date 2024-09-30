@@ -5,7 +5,7 @@ const app = express();
 
 // Initialize Google Cloud Storage client
 const storage = new Storage();
-const bucketName = process.env.GCS_BUCKET || ' dalquint-cdn-bucket';
+const bucketName = process.env.GCS_BUCKET || 'dalquint-cdn-bucket';
 const cdnBaseUrl = process.env.CDN_BASE_URL || 'https://your-cdn-url.com'; // Set your CDN base URL
 
 // Set up EJS as the templating engine
