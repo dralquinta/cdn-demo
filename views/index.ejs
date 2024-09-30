@@ -3,8 +3,20 @@
 <head>
   <title>CDN Demo</title>
   <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <h1>Content from CDN</h1>
+
+  <h2>Images</h2>
+  <div class="image-gallery"></div>
+
+  <h2>Video</h2>
+  <div class="video-container"></div>
+
   <script>
-    const cdnBaseUrl = '<%= cdnBaseUrl %>';
+    // EJS code to inject the cdnBaseUrl into the JavaScript
+    const cdnBaseUrl = '<%- cdnBaseUrl %>'; 
 
     async function fetchFiles(directory) {
       try {
