@@ -3,5 +3,4 @@ kind: ConfigMap
 metadata:
   name: cdn-config
 data:
-  #CDN_BASE_URL: "https://34.36.0.65" 
-  CDN_BASE_URL: "https://storage.googleapis.com/dalquint-cdn-bucket" 
+  CDN_BASE_URL: "https://34.36.0.65"
